@@ -1,0 +1,56 @@
+ <%# navbar here %>
+<%=render "navbar"%>
+
+<div class = "container-fluid position-relative my-3">
+  <div class= "row">
+    <div class="col-md-2 p-2 border overflow-auto">
+      <%=link_to "Create Blog", new_blog_path, :class => "btn btn-outline-primary w-100 my-3"%>
+      <hr>
+      <h4>Recent Blogs<hr></h4>
+      <% @blog.each do |item| %>
+        <% if @blog.empty? %>
+          <%next%>
+        <% else %>
+          <ul>
+            <li class="">
+              <%=link_to item.blog_title, item, :class => "text-decoration-none text-success"%>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-8  border">
+      <div class = "bg-secondary">
+        <h1 class="d-flex justify-content-center">All Blogs</h1>
+        <div class= "bg-light">
+          <div class = "col-md-12">
+            <div class = "row">
+              <% @blog.each do |blog| %>
+                <div class = "col-md-12 my-2 ">
+                  <div class = "card p-3 shadow-sm">
+                    <div class = "card-title">
+                      <div class="d-flex justify-content-between">
+                        <p><%=blog.blog_title%></p>
+                        <p class="sm">Author:<%=blog.blog_author%></p>
+                      </div>
+                    </div>
+                    <div class = "card-body"><%=blog.blog_content%></div>
+                    <div class= "card-footer "><%=link_to "Read More", blog, :class => "btn text-decoration-none"%></div>
+                        <div >
+                            <%= link_to 'Remove', blog_path(blog),
+                            method: :delete,
+                            data: { confirm: 'Are You sure?' } %>
+                        </div>
+                    </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "col-md-2 border">
+    
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class = "container">
+
+    <div class = "row"  >
+    
+        <div class = "col-mdd-4 d-fex justify-content-center">
+            <%= form_for :blog,url:{ action: :create },  method: :post do |f| %>
+                Title <%= f.text_field :blog_title , :class => "form-control"%><br />
+                Content <%= f.text_field :blog_content, :class => "form-control" %><br />
+                Author <%= f.text_field :blog_author, :class => "form-control" %><br />
+                <%= f.submit  :class => "btn btn-outline-success"%>
+            <% end %>
+            <%if flash[:blog_errors]%>
+                <% flash[:blog_errors].each do |msg| %>
+                    <div class="alert alert-danger">
+                        <%= msg %>
+                    </div>
+                <% end %>
+            <%end%>
+        
+        
+        </div>
+    
+    </div>
+
+</div>
