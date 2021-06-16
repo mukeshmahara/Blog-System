@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :blog
   resources :user
   # resources :login
+  get "/logout", to: "login#logout"
   get "/login", to: "login#index"
   post "/login", to: "login#check_credentials"
   # namespace :user do
