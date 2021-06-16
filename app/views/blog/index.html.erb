@@ -1,10 +1,16 @@
  <%# navbar here %>
 <%=render "navbar"%>
 
-<div class = "container-fluid position-relative my-3">
+<div class = "container-fluid my-5 pt-3">
   <div class= "row">
     <div class="col-md-2 p-2 border overflow-auto">
-      <%=link_to "Create Blog", new_blog_path, :class => "btn btn-outline-primary w-100 my-3"%>
+      <%
+      if session[:user_id].nil?%>
+        
+      <%else%>
+            <%=link_to "Create Blog", new_blog_path, :class => "btn btn-outline-primary w-100 my-3"%>  
+      <%end%>
+      
       <hr>
       <h4>Recent Blogs<hr></h4>
       <% @blog.each do |item| %>
@@ -19,7 +25,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-md-8  border">
+    <div class="col-md-8  border overflow-auto">
       <div class = "bg-secondary">
         <h1 class="d-flex justify-content-center">All Blogs</h1>
         <div class= "bg-light">
