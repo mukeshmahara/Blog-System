@@ -1,0 +1,121 @@
+
+
+<%=render "./blog/navbar"%>
+
+<div class="container-fluid mt-5 py-3 bg-dark">
+
+    <div class= "container">
+ 
+
+        <div class = "d-flex justify-content-center ">
+        
+            <h2>User Registration</h2>
+
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-center ">
+            <div class="col-md-9 border shadow-sm bg-light rounded p-4 justify-content-center ">
+
+                <%= form_for :register ,html: { multipart: true } do |form|  %>
+
+                   
+                   <img id="output"  class="rounded-circle fa fa-user fa-3x mb-3" width="100px" height="100px" />
+
+                    <div >
+                    <%= form.file_field :avatar, :onchange=>"loadFile(event)" %>
+                    </div>
+                    
+                    <hr>
+
+                    <div class = "row m-3">
+                        <div class="col-md-6">
+                        
+                            <%= form.label :username, "Username:" %>
+                            <%= form.text_field :username ,:class =>"form-control "%>
+                            
+                            <%= form.label :email, "Email:" %>
+                            <%= form.text_field :email ,:class =>"form-control "%>
+
+                            <%= form.label :address, "Address:" %>
+                            <%= form.text_field :address,:class =>"form-control "%>
+                        
+                            <%= form.label :password, "Password:" %>
+                            <%= form.text_field :password ,:class =>"form-control "%>
+
+                            <%= form.label :age, "Age:" %>
+                            <%= form.text_field :age ,:class =>"form-control "%>
+                            
+                        </div>
+                        <div class="col-md-6 flex-column">
+                            <%= form.label :job, "Job:" %>
+                            <%= form.text_field :job, :class =>"form-control "%>
+
+                            <%= form.label :phone_no, "Phone:" %>
+                            <%= form.text_field :phone_number, :class =>"form-control " %>
+                            
+                            <%= form.label :gender, "Gender:" ,:class=>"" %>
+                            <div class = "d-flex ">
+
+
+                                <div class ="my-3 mx-3">
+                                    <%= form.radio_button :gender, "Male" %>
+                                    <%= form.label :gender, "Male" %>
+                                </div>
+                                <div class ="my-3 mx-3">
+
+                                    <%= form.radio_button :gender, "Female" %>
+                                    <%= form.label :gender, "Female" %>
+
+                                </div>                
+                            </div>
+                            
+                            
+                        
+                        </div>
+                        
+                    </div>
+                    <div class= "row">
+                        <div class = "col-md-3">
+                            
+                            <%= form.label :fb_link, "Facebook " %>
+                            <%= form.text_field :fb_link, :class =>"form-control " %>
+                        </div>
+                        <div class = "col-md-3">
+                    
+                            <%= form.label :insta_link, "Instagram" %>
+                            <%= form.text_field :insta_link, :class =>"form-control " %>
+                        </div>
+                        <div class = "col-md-3">
+                                    
+                            <%= form.label :twitter_link, "Twitter" %>
+                            <%= form.text_field :twitter_link, :class =>"form-control " %>
+                        </div>
+                        <div class = "col-md-3">
+                            
+                            <%= form.label :stack_overflow_link, "Stack-Overflow" %>
+                            <%= form.text_field :stack_overflow_link, :class =>"form-control " %>
+                        </div>
+                    </div>
+                    <%= form.submit "Register", :class =>"btn btn-outline-success w-100 my-3"%>
+                <% end %>
+            
+            </div>
+
+        </div>    
+    
+    
+    <div>
+
+<div>
+
+
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	// image.classList.remove("fa fa-user") 
+    image.src = URL.createObjectURL(event.target.files[0]);
+    
+};
+</script>
+
+
