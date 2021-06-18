@@ -1,9 +1,8 @@
- <%# navbar here %>
-<%=render "navbar"%>
 
-<div class = "container-fluid my-5 pt-3">
+
+<div class = "container-fluid mt-4 pt-5">
   <div class= "row">
-    <div class="col-md-2 p-2 border overflow-auto">
+    <div class="col-md-3 px-5 shadow-lg rounded recent-blog ">
       <%
       if session[:user_id].nil?%>
         
@@ -14,8 +13,8 @@
       <hr>
       <h4>Recent Blogs<hr></h4>
       <% @blog.each do |item| %>
-        <% if @blog.empty? %>
-          <%next%>
+        <% if @blog.nil? %>
+          <p>No any blog created.... </p>
         <% else %>
           <ul>
             <li class="">
@@ -25,38 +24,70 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-md-8  border overflow-auto">
-      <div class = "bg-secondary">
-        <h1 class="d-flex justify-content-center">All Blogs</h1>
-        <div class= "bg-light">
-          <div class = "col-md-12">
+    <div class="col-md-9   ">
+      <div class = "">
+
+        <div class= "">
+          <div class = "col-md-12 overflow-auto">
             <div class = "row">
-              <% @blog.each do |blog| %>
-                <div class = "col-md-12 my-2 ">
-                  <div class = "card p-3 shadow-sm">
-                    <div class = "card-title">
-                      <div class="d-flex justify-content-between">
-                        <p><%=blog.blog_title%></p>
-                        <p class="sm">Author:<%=blog.blog_author%></p>
+            <div class= "col-md-12 " style="overflow:scroll; height:400px;">
+              
+                <% @blog.each do |blog| %>
+                  <div class = "col-md-12  ">
+
+                  
+                    <div class = "card rounded">
+                      <div class = "card-header header-color">
+                        <div class="inner p-2  "  >
+                          <div class="inner-p">
+                            <h4 class="text-success my-1"><%=blog.blog_title%></h4>
+                            <p>
+                              <span class="badge badge-white mx-1 text-dark border border-brand-green">
+                                
+                                <%=blog.blog_author%>
+                              </span>
+                              <span class="badge badge-success mx-1 text-dark "><i class="fas fa-book-reader text-dark"></i><%=blog.created_at.hour%>hr&nbsp;<%=blog.created_at.min%>min</span>
+                              <span class="badge badge-primary mx-1 text-dark "><i class="fas fa-calendar-alt"></i><%=blog.created_at.month%>,<%=blog.created_at.day%> &nbsp;<%=blog.created_at.year%></span>
+                              
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div class = "card-body"><%=blog.blog_content%></div>
-                    <div class= "card-footer "><%=link_to "Read More", blog, :class => "btn text-decoration-none"%></div>
-                        <div >
-                            <%= link_to 'Remove', blog_path(blog),
+
+                       
+                      <div class="trix-content card-body m-0">
+                        
+                        <div class="">
+                        <%=blog.content.to_plain_text.truncate_words(25)%>
+                        
+                        </div>
+
+                                             
+                        <%if isLogged_in%>  
+                        <div class="d-flex justify-content-between">
+                          <%=link_to "Read More", blog, :class => "text-success text-decoration-none "%>
+                          <div class="fb-comments" data-href="http://www.localhost:3000/blog" data-width="600px" data-numposts="0"></div>
+                           <div >
+                             <%= link_to '', blog_path(blog), :class => "fa fa-trash text-danger text-right ",
                             method: :delete,
                             data: { confirm: 'Are You sure?' } %>
+                            <%=link_to "", blog, :class => "text-secondary fa fa-edit text-decoration-none mx-3"%>
+                          
+                           </div>
+                        
                         </div>
+                        <%end%>
+                        
                     </div>
+                  </div>
                 </div>
-              <% end %>
+                <hr>
+              <% end %> 
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class = "col-md-2 border">
     
-    </div>
   </div>
 </div>
