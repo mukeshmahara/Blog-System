@@ -1,10 +1,12 @@
+<%=current_user%>
+
 <div class = " fixed-top ">
     <nav class="navbar navbar-expand-lg nav-color navbar-light shadow d-flex justifiy-content-center">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand" href="#"></a>
-
+     
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
@@ -14,20 +16,16 @@
       <%if session[:user_id].nil?%>
         <li class = "nav-item active">
         
-            <a class = "nav-link btn btn-outline-primary" href="/login" >login</a>
+            <a class = "nav-link btn btn-outline-light" href="/login" ><i class="fas fa-sign-in-alt"></i>login</a>
         </li>
-        <li> </li>
+        <li class = "nav-item active">
+        
+            <a class = "nav-link btn btn-outline-info mx-2" href="/register" ><i class="fas fa-user-plus"></i>sign up</a>
+        </li>
         <%else%>
-        <li><a class = "nav-link btn mx-3 text-light" href="#"><img src="./<%=url_for(current_user.avatar)%>" class="profile " ><%=current_user.username%> </a></li>
-        <li><a class = "nav-link btn btn-outline-danger text-light " href="/logout" method="get" action="logout">logout</a></li>
-        <li>
-          <a class = "nav-link" href="#">
-          
-    
-                     
-          
-          </a>
-        <li>
+          <li class = "nav-item "><a class = "nav-link btn btn-none text-light " href="#"> <img src=<%=url_for(current_user.avatar)%> class="profile"><%=current_user.username%></a></li>
+       
+          <li class = "nav-item "><a class = "nav-link btn btn-outline-danger text-light " href="/logout" method="get" action="logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
         
 
         <%end %>
