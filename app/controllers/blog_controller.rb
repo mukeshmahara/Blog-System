@@ -1,8 +1,13 @@
+
+
 class BlogController < ApplicationController
 
     def index
+        @user = User.joins(:blogs)
 
-        @blog = Blog.all
+        @blog = Blog.joins(:user)
+        
+    
 
     end
 
@@ -13,11 +18,10 @@ class BlogController < ApplicationController
     
     end
 
- 
 
     def create 
-        blog = Blog.new(params.require(:blog).permit(:blog_title,:blog_content,:blog_author,:user_id))
-        if blog.save
+        blog = Blog.new(params.require(:blog).permit(:blog_title,:content, :blog_author,:user_id))
+        if blog.save!
             redirect_to blog_index_path
         else
             flash[:blog_errors] = ["Unable to create Blog"]  
