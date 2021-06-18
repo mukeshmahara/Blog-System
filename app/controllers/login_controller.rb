@@ -7,31 +7,21 @@ end
 
 def check_credentials
 
-    
-    # @user = User.authenticate(params[:username], params[:password])
-    # puts @user
-    # @user = User.find_by(:username => params[:username])
-    # @user = User.create(params.require(:user).permit(:username,        
-    #     :password))  
-    # @user = User.find_by(:id)  
-    # puts @user.id
-    
-    
+    @uname = User.pluck(:username)
+    @pass = User.pluck(:password)
+    @username = params[:username]
+    @password = params[:password]
 
-    @uname = User.pluck(:username).to_a
-    @pass = User.pluck(:password).to_a
-    username = params[:username]
-    password = params[:password]
-
-    @user = User.find_by(:username => username)  
-    puts @user
+   
     
-    if username =="test" && password == "test"
-        
-        session[:user_id] = username
-        # session[:user_id]
+    if (@uname.include? @username) && (@pass.include? @password)
+        @user = User.find_by!(:username => @username,:password =>@password)  
+
+        session[:user_id] = @user.id
         redirect_to "/blog"
-    else
+
+     else 
+        reset_session
         flash[:login_errors] = ["Invalid credentials"]
         redirect_to "/login"
     end
@@ -43,7 +33,7 @@ def logout
     # session[:user_id].
     reset_session  
 
-    if session[:user_id].nil?
+    if session[:user].nil?
         flash[:logout_msg] = ["Successfully logout"]
         
     end
