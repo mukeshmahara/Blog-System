@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     # devise :database_authenticatable, :recoverabe, :rememberable
-    # has_many :blogs
-
-    validates :username, :email, :password, :job, presence:true
+    has_many :blogs
+    has_one_attached :avatar
+    # validates :username, :email, :password, :job, presence:true
     
 end
