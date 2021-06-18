@@ -1,0 +1,28 @@
+// Place all the styles related to the register controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+*{
+    margin: 0;
+    padding: 0;
+
+
+}
+
+input.file{
+    // color:red !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.input-profile-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    border-radius: 50%;
+
+
+}

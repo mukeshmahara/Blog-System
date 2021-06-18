@@ -1,3 +1,19 @@
 // Place all the styles related to the blog controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.profile{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.nav-color{
+    background-image: linear-gradient( rgb(136, 136, 179),rgb(208, 136, 136));
+}
+
+.recent-blog{
+    background-image: linear-gradient(rgb(230, 186, 186), rgb(136, 136, 179));
+}
+
