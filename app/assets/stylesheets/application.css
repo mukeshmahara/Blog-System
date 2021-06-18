@@ -13,9 +13,22 @@
  *= require_tree .
  *= require_self
  */
-
+ @import "./actiontext.scss";
 
  *{
      margin: 0;
      padding: 0;
+
  }
+ html{
+    background-color: rgb(99, 97, 95);
+ }
+ .header-color{background-image: linear-gradient(rgb(137, 146, 142),skyblue) !important;
+
+    background-color:rgb(216, 208, 208 )
+}
+
+.bg-profile{
+    background-image: url(/myblogs/app/assets/images/blog-bg.jpg);
+    
+}
