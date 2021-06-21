@@ -1,22 +1,23 @@
 class ApplicationController < ActionController::Base
     def current_user    
-        User.find_by(id: session[:user_id])  
+        return User.find_by(id: session[:user_id])  
+        
     end
 
-    def logged_in?
+    def isLogged_in
        
-        !current_user.nil?  
+        return !current_user.nil?  
     end
 
 
     helper_method :current_user
-    helper_method :logged_in?
-    def current_user
-    User.find_by(id: session[:user_id])
-    end
-    def logged_in?
+    helper_method :isLogged_in
+    # def current_user
+    # User.find_by(id: session[:user_id])
+    # end
+    # def logged_in?
         
-        !current_user.nil?
-    end
+    #     !current_user.nil?
+    # end
 
 end
