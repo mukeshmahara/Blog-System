@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
  @import "./actiontext.scss";
 
  *{
@@ -28,7 +29,3 @@
     background-color:rgb(216, 208, 208 )
 }
 
-.bg-profile{
-    background-image: url(/myblogs/app/assets/images/blog-bg.jpg);
-    
-}
