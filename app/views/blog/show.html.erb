@@ -1,29 +1,48 @@
+
+
+
 <div class="container">
-    <div class= "row">
 
-        <div class="col-md-12 bg-secondary">
+    <div class= "row ">
 
-            <div class="d-flex justify-content-center">
-                <div class="rounded-circle bg-light fa fa-user my-3 fa-4x p-4">
-                            
+        <div class="col-md-12 bg-profile mt-5 pt-4" style="color:green; background-image:linear-gradient(red,black); ">
+       
+            <div class="text-center">
+
+                
+                <%if @user.avatar.nil?%>
+                    <i class="rounded-circle bg-light fa fa-user p-3 fa-3x"></i>
+                    
+                <%else%>
+                    <img src="<%=url_for(@user.avatar)%>" class="rounded-circle" height="150px" width="150px">
+                    
+                <%end
+                %>
+                  
+                <div class=""><strong><%=@user.username%></strong></div>  
+                <div>(<%=@user.job%>)</div>
+                <div>Email: <%=@user.email%></div>
+                
+                <div >
+                    <a href="<%=@user.insta_link%>" class="text-success"><i class="fab fa-instagram"></i></a>
+                    <a href="<%=@user.fb_link%>" class="text-success"><i class="fab fa-facebook"></i></a>
+                    <a href="<%=@user.fb_link%>" class="text-success"><i class="fab fa-linkedin"></i></a>
+                    <a href="<%=@user.fb_link%>" class="text-success"><i class="fab fa-stack-overflow"></i></a>
+
                 </div>
-                <div>                <%=@blog.blog_author%></div>
-
-
-
-            </div>
-
-                
-
-            <div class= "col-md-12">
-            <div class = "d-flex justify-content-between mx-5">
-              
-                
-                <%=@blog.blog_content%>  
-            </div>
-               
+            </div>    
         </div>
 
+         <div class="bg-light shadow">
+        
+        <div class = "col-md-12">  
+            <%=@blog.content%>  
+        </div>
+        <div class="fb-comments" data-href="http://localhost:3000/blog" data-width="700" data-numposts="0"></div>
+
     </div>
+        
+    </div>
+
 
 </div>

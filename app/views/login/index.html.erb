@@ -1,9 +1,18 @@
+<%=render "./partials/navbar"%>
+
 <div class = "container">
-<%=@username%>hello
-    <div class = "row d-fex justify-content-center p-5"  >
+
+    <div class = "row d-fex justify-content-center p-5 mt-5"  >
+    
     
         <div class = "col-md-4 border p-4  shadow rounded bg-light ">
-            <div class="d-flex justify-content-center"><i class="fa fa-id-card-alt  fa-2x rounded-circle border shadow p-3 text-center"></i></div><hr>    
+            <div class="d-flex justify-content-center">
+                <i class="fa fa-id-card-alt  fa-2x rounded-circle border shadow p-3 text-center"></i>
+            </div>
+            
+            <hr>    
+            <%=current_user.inspect%>
+            
             <%= form_with url:{ action: :check_credentials } ,method: :post do |f| %>
                  <%= f.text_field :username, :class => "form-control", :placeholder =>"Username"%><br />
                  <%= f.password_field :password, :class => "form-control", :placeholder =>"Password" %><br />
@@ -21,6 +30,13 @@
             
             <%if flash[:logout_msg]%>
                 <% flash[:logout_msg].each do |msg| %>
+                    <div class="alert alert-success my-2">
+                        <%= msg %>
+                    </div>
+                <% end %>
+            <%end%>
+            <%if flash[:user_created_msg]%>
+                <% flash[:user_created_msg].each do |msg| %>
                     <div class="alert alert-success my-2">
                         <%= msg %>
                     </div>
