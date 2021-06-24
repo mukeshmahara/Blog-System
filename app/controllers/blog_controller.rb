@@ -3,19 +3,12 @@
 class BlogController < ApplicationController
 
     def index
-        # @user = User.joins(:blogs)
+        @user = User.joins(:blogs)
 
-        user = User.all;
-        user.each do |user|
-            puts user.id
-        end
+        
+
         @blog = Blog.joins(:user)
-
-        # @blog = Blog.find(params[:id])
-       
-        # user_id = @blog.user_id
-       
-        # @user = User.find(user_id)
+        
     
 
     end
