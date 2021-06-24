@@ -6,16 +6,15 @@ Rails.application.routes.draw do
 
   resources :blog
   resources :user
-  get "/user/profile", to:"user#index"
-  # resources :login
-  get "/logout", to: "login#logout"
-  get "/login", to: "login#index"
-  post "/login", to: "login#check_credentials"
-  # namespace :user do
-  #   resources :blog
-  # end
-
   resources :profile
 
   resources :register
+  
+  get "/user/profile", to:"user#index"
+  
+  get "/logout", to: "login#logout"
+  get "/login", to: "login#index"
+  post "/login", to: "login#check_credentials"
+
+  
 end
