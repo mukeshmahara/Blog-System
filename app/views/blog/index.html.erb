@@ -23,7 +23,14 @@
           <p>No any blog created.... </p>
         <% else %>
           <ul>
+          <%# This code gives helps me to give user avaatar of the user %>
+              <%
+                user_id = blog.user_id
+                user = User.find(user_id)
+
+              %>
             <li class="">
+              <img src="<%=url_for(user.avatar)%>" class="profile ">
               <%=link_to blog.blog_title, blog, :class => "text-decoration-none text-success"%>(@<%=blog.blog_author%>)
             </li>
           </ul>
@@ -40,17 +47,22 @@
               
               <% @blog.each do |blog| %>
                 <div class = "col-md-12  ">
+                <%
+                  user_id = blog.user_id
+                  user = User.find(user_id)
 
-                
+                %>
                   <div class = "card rounded">
                     <div class = "card-header header-color">
                       <div class="inner p-2  "  >
                         <div class="inner-p">
                           <h4 class="text-success my-1"><%=blog.blog_title%></h4>
                           <p>
+                          <img src="<%=url_for(user.avatar)%>" class="profile ">
                             <span class="badge badge-white mx-1 text-dark border border-brand-green">
                               
-                              <%=blog.blog_author%>
+                              <%=link_to blog.blog_author, profile_path(blog.blog_author), :class => "text-decoration-none text-success"%>
+                              
                             </span>
                             <span class="badge badge-success mx-1 text-dark "><i class="fas fa-book-reader text-dark"></i> <%=blog.created_at.hour%>hr&nbsp;<%=blog.created_at.min%>min</span>
                             <span class="badge badge-primary mx-1 text-dark "><i class="fas fa-calendar-alt"></i> <%=blog.created_at.month%>, <%=blog.created_at.day%> &nbsp;<%=blog.created_at.year%></span>
