@@ -10,11 +10,12 @@ Rails.application.routes.draw do
 
   resources :register
   
-  get "/user/profile", to:"user#index"
+  get "/user/profile", to: "user#index"
   
   get "/logout", to: "login#logout"
   get "/login", to: "login#index"
   post "/login", to: "login#check_credentials"
 
+  get "/search", to: "blog#blogSearch"
   
 end
