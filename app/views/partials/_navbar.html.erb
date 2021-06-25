@@ -22,12 +22,23 @@
         
             <a class = "nav-link btn btn-outline-info mx-2" href="/register" ><i class="fas fa-user-plus"></i>sign up</a>
         </li>
+
+        <li>
+          <div class = "d-flex ">
+              <div><%= form_with url: "/search", method: :get do |form| %></div>
+               <%#= form.label :query, :class =>"" %>
+                <div> <%= form.text_field :query ,:placeholder=>"Search Blogs",:class=>"form-control"%></div>
+                 <div><%= form.submit "Search",:class=>"btn btn-outline-success  mx-2" %> </div>
+              <% end %>
+            
+          </div>
+        </li>
+
         <%else%>
-          <li class = "nav-item "><a class = "nav-link btn btn-none text-light " href="#"> <img src=<%=url_for(current_user.avatar)%> class="profile"><%=current_user.username%></a></li>
+          <li class = "nav-item "><a class = "nav-link btn btn-none text-light " href="/profile/<%=current_user.username%>"> <img src=<%=url_for(current_user.avatar)%> class="profile"><%=current_user.username%></a></li>
        
           <li class = "nav-item "><a class = "nav-link btn btn-outline-danger text-light " href="/logout" method="get" action="logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
         
-
         <%end %>
       
     </ul>
