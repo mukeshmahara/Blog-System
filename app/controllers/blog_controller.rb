@@ -3,19 +3,15 @@
 class BlogController < ApplicationController
 
     def index
-        @user = User.joins(:blogs)
-
         
-
+        @user = User.joins(:blogs)
         @blog = Blog.joins(:user)
         
-    
-
     end
 
 
     def show
-        
+
         if current_user.nil?
             flash[:login_restrict] = ["User must login first"]
             redirect_to "/blog"
@@ -41,7 +37,13 @@ class BlogController < ApplicationController
     end
 
     def edit
-        blog = Blog.update(params.require(:blog).permit(:blog_title,:content, :blog_author,:user_id))
+    @blog = Blog.find(params[:id])
+    
+    end
+
+    def update
+        blog=Blog.find(params[:id])
+        blog.update(params.require(:blog).permit(:blog_title,:content, :blog_author,:user_id))
         if blog.save!
             redirect_to blog_index_path
         else
@@ -63,5 +65,13 @@ class BlogController < ApplicationController
     end
 
 
+    # Blog Search Functionality
+    def blogSearch
+
+        searchKey = params[:query]
+
+        @searchedBlog = Blog.where('blog_title like ? OR blog_author like ?',"%#{searchKey}%","%#{searchKey}%")
+        render "search"
+    end
 
 end
