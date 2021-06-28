@@ -12,7 +12,7 @@
       <li class="nav-item active">
         <a class="nav-link " href="/blog"><i class="fa fa-home fa-2x"></i> <span class="sr-only">(current)</span></a>
       </li>
-      
+       
       <%if session[:user_id].nil?%>
         <li class = "nav-item active">
         
@@ -23,8 +23,16 @@
             <a class = "nav-link btn btn-outline-info mx-2" href="/register" ><i class="fas fa-user-plus"></i>sign up</a>
         </li>
 
-        <li>
-          <div class = "d-flex ">
+       
+
+        <%else%>
+          <li class = "nav-item "><a class = "nav-link btn btn-none text-light " href="/profile/<%=current_user.username%>"> <img src=<%=url_for(current_user.avatar)%> class="profile"><%=current_user.username%></a></li>
+       
+          <li class = "nav-item "><a class = "nav-link btn btn-outline-danger text-light " href="/logout" method="get" action="logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
+        
+        <%end %>
+      <li>
+          <div class = "d-flex mx-4">
               <div><%= form_with url: "/search", method: :get do |form| %></div>
                <%#= form.label :query, :class =>"" %>
                 <div> <%= form.text_field :query ,:placeholder=>"Search Blogs",:class=>"form-control"%></div>
@@ -33,14 +41,6 @@
             
           </div>
         </li>
-
-        <%else%>
-          <li class = "nav-item "><a class = "nav-link btn btn-none text-light " href="/profile/<%=current_user.username%>"> <img src=<%=url_for(current_user.avatar)%> class="profile"><%=current_user.username%></a></li>
-       
-          <li class = "nav-item "><a class = "nav-link btn btn-outline-danger text-light " href="/logout" method="get" action="logout"><i class="fas fa-sign-out-alt"></i>logout</a></li>
-        
-        <%end %>
-      
     </ul>
     
   </div>
