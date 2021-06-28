@@ -24,8 +24,22 @@
  html{
     background-color: rgb(99, 97, 95);
  }
- .header-color{background-image: linear-gradient(rgb(137, 146, 142),skyblue) !important;
+ .header-color{background-image: linear-gradient(to right,rgb(137, 146, 142),rgb(211, 88, 79)) !important;
 
     background-color:rgb(216, 208, 208 )
 }
 
+.profile-img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    margin: 50px 0 0 0;
+}
+
+
+.profile-img-sm{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    margin: 0 0 0 0;
+}
