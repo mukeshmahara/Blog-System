@@ -18,8 +18,8 @@
 
                 <%= form_for :register ,html: { multipart: true } do |form|  %>
 
-                   
-                   <img id="output"  class="rounded-circle fa fa-user fa-3x mb-3" width="100px" height="100px" />
+                   <div>Profile Picture</div>
+                   <img id="output"  class="rounded-circle fa fa-user fa-3x mb-3"  width="100px" height="100px" />
 
                     <div >
                     <%= form.file_field :avatar, :onchange=>"loadFile(event)" %>
