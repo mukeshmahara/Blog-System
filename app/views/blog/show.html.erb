@@ -3,28 +3,30 @@
 
 <div class="container">
 
+  
     <div class= "row ">
 
-        <div class="col-md-12 bg-profile mt-5 pt-4" style="color:green; background-image:linear-gradient(red,black); ">
-       
-            <div class="text-center">
+        <div class="col-md-12 bg-profile mt-5 pt-4" style="color:green; background-image:url('/assets/ruby_on_rails.jpg'); ">
+   
+            <div class="text-center p-5">
 
                 
                 <%if @user.avatar.nil?%>
-                    <i class="rounded-circle bg-light fa fa-user p-3 fa-3x"></i>
+                    <i class="rounded-circle border border-3 bg-light fa fa-user p-3 fa-3x"></i>
                     
                 <%else%>
-                    <img src="<%=url_for(@user.avatar)%>" class="rounded-circle" height="150px" width="150px">
-                    
+                    <img src="<%=url_for(@user.avatar)%>" class="rounded-circle border border-4 border-danger shadow"  height="150px" width="150px">
+                      
                 <%end
                 %>
                 
-                  
-                <div class=""><strong><%=@user.username%></strong></div>  
-                <div>(<%=@user.job%>)</div>
-                <div>Email: <%=@user.email%></div>
+
+                <div class=""><strong class="badge bg-light text-dark"><%=@user.username%> (<%=@user.job%>)</strong>
+                    <%#= image_tag url_for("blog.jpg")%>
+                </div>  
+                 <%#% <div>Email: <%=@user.email%>
                 
-                <div >
+                <div class="badge mx-1 bg-light text-light border " >
                     <a href="<%=@user.insta_link%>" class="text-success"><i class="fab fa-instagram"></i></a>
                     <a href="<%=@user.fb_link%>" class="text-success"><i class="fab fa-facebook"></i></a>
                     <a href="<%=@user.fb_link%>" class="text-success"><i class="fab fa-linkedin"></i></a>
@@ -35,7 +37,7 @@
         </div>
 
          <div class="bg-light shadow">
-        
+        <div class= "text-center display-1 "><p class="badge bg-info border"><%=@blog.blog_title%></p></div>
         <div class = "col-md-12">  
             <%=@blog.content%>  
         </div>

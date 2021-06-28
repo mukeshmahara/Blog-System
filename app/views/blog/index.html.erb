@@ -2,12 +2,12 @@
 
 <div class = "container-fluid mt-4 pt-5">
   <div class= "row">
-    <div class="col-md-3  shadow-lg rounded recent-blog ">
+    <div class="col-md-3  shadow-lg rounded recent-blog "  >
       <%
       if session[:user_id].nil?%>
         
       <%else%>
-            <%=link_to "Create Blog", new_blog_path, :class => "btn btn-outline-primary w-100 my-3"%>  
+            <%=link_to "Create Blog", new_blog_path, :class => "btn btn-outline-primary col-md-12 my-3"%>  
       <%end%>
       <%if flash[:login_restrict]%>
         <% flash[:login_restrict].each do |msg| %>
@@ -18,25 +18,28 @@
       <%end%>
       <hr>
       <h4>Recent Blogs<hr></h4>
-      <% @blog.each do |blog| %>
-        <% if @blog.nil? %>
-          <p>No any blog created.... </p>
-        <% else %>
-          <ul>
-          <%# This code gives helps me to give user avaatar of the user %>
-              <%
-                user_id = blog.user_id
-                user = User.find(user_id)
+      <div style="overflow:scroll; height:400px;">
+        <% @blog.each do |blog| %>
+          <% if @blog.nil? %>
+            <p>No any blog created.... </p>
+          <% else %>
+            <ul>
+            <%# This code gives helps me to give user avaatar of the user %>
+                <%
+                  user_id = blog.user_id
+                  user = User.find(user_id)
 
-              %>
-            <li class="">
-              <img src="<%=url_for(user.avatar)%>" class="profile ">
-              <%=link_to blog.blog_title, blog, :class => "text-decoration-none text-success"%>(@<%=blog.blog_author%>)
-            </li>
-          </ul>
+                %>
+              <div class=" "> 
+                <kbd><%=link_to blog.blog_title , blog, :class => "text-decoration-none text-light "%>(<%=blog.created_at.strftime('%b %d, %Y')%>)</kbd><br>
+                <div class="small badge badge-white  text-dark border  "><img src="<%=url_for(user.avatar)%>" class="profile-img-sm"><%=blog.blog_author%></div>
+              </div>
+            </ul>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
+    
     <div class="col-md-9   ">
       <div class = "">
         
@@ -52,20 +55,31 @@
                   user = User.find(user_id)
 
                 %>
-                  <div class = "card rounded">
+                  <div class = "card rounded shadow">
                     <div class = "card-header header-color">
-                      <div class="inner p-2  "  >
-                        <div class="inner-p">
-                          <h4 class="text-success my-1"><%=blog.blog_title%></h4>
+                      <div class="inner p-1 "  >
+                        <div class="inner-p bg-light p-2">
+                          <h3 class="text-success "><%=blog.blog_title%></h3>
                           <p>
                           <img src="<%=url_for(user.avatar)%>" class="profile ">
-                            <span class="badge badge-white mx-1 text-dark border border-brand-green">
+                            <span class=" mx-1 text-dark border rounded p-1">
                               
-                              <%=link_to blog.blog_author, profile_path(blog.blog_author), :class => "text-decoration-none text-success"%>
+                              <%=link_to blog.blog_author, profile_path(blog.blog_author), :class => "text-decoration-none text-uppercase text-dark"%> (<%=user.job%>)
                               
                             </span>
-                            <span class="badge badge-success mx-1 text-dark "><i class="fas fa-book-reader text-dark"></i> <%=blog.created_at.hour%>hr&nbsp;<%=blog.created_at.min%>min</span>
-                            <span class="badge badge-primary mx-1 text-dark "><i class="fas fa-calendar-alt"></i> <%=blog.created_at.month%>, <%=blog.created_at.day%> &nbsp;<%=blog.created_at.year%></span>
+                            <%#  Lets suppose a person can read upto 50 words per minute%>
+                            <%minute= blog.content.to_plain_text.scan(/[\w-]+/).size/50
+                            if minute>=60
+                              minute = minute%60
+                              hour = minute/60 
+
+                            end
+                              
+                            %>
+                            <span class="badge badge-primary mx-1 bg-success text-light border border-brand-green "><i class="fas fa-book-reader text-light"></i> 
+                            
+                            <%=minute%>&nbsp;Min. Read</span>
+                            <span class="badge badge-primary mx-1 bg-primary text-light "><i class="fas fa-calendar-alt text-light"></i> <%=blog.created_at.strftime('%b %d, %Y')%></span>
                             
                           </p>
                         </div>
@@ -76,7 +90,7 @@
                     <div class="trix-content card-body m-0">
                       
                       <div class="">
-                        <%=blog.content.to_plain_text.truncate_words(25)%>
+                        <%=blog.content.to_plain_text.truncate_words(50)%>
                       
                       </div>
 
@@ -84,7 +98,7 @@
                       
                       <div class="">
                         <%=link_to "Read More", blog, :class => "text-success text-decoration-none "%>
-                        <%if isLogged_in%>  
+                        <%if isLogged_in && (current_user.id)== blog.user_id%>  
                           <div class="">
                             <%= link_to '', blog_path(blog), :class => "fa fa-trash text-danger text-right ",
                             method: :delete,
