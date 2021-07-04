@@ -1,0 +1,41 @@
+<div>
+    <div>
+
+
+
+
+
+        <div id="like_cmnt_show " class="d-flex justify-content-between border" >
+
+            <span class="right"><div id="likes"></div>likes</span>
+            <div id="commnets"></div>comments
+        <hr>
+        </div>
+
+        <div class="d-flex justify-content-end my-3">
+            
+            <button class="btn border border-primary " id="likebtn">like</button>
+            <button class="btn border border-info mx-5" id = "cmntbtn">comment</button>
+            <button class="btn border border-success" id= "sharebtn">share</button>
+
+        </div>
+
+        <div id="comment_box" class= " bg-light shadow p-4 d-none">
+
+            <div class="d-flex justify-content-inline  ">
+            <%= form_with model:{@blog,@comment},method: :post do |form| %>
+                <span>
+                    `
+                    <%=form.text_area :comment%>
+                    <%=form.submit%>
+
+                
+                </span>
+            <% end %>
+           
+            <%# Comment form %>
+        </div>
+
+
+    </div>
+</div>
