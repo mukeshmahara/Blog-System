@@ -5,10 +5,11 @@ Rails.application.routes.draw do
 
   resources :blog, :user, :profile, :register
   
-  # resources :blog do
-  #   resources :comment, only: [:index, :new, :create]
-  # end
+  resources :blog do
+    resources :comment, only: [:create, :destroy,:edit]
+  end
 
+  post "/blog/comments", to:"blog#create_comment"
   get "/user/profile", to: "user#index"
   
   get "/logout", to: "login#logout"
