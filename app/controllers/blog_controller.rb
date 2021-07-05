@@ -6,9 +6,25 @@ class BlogController < ApplicationController
         
         @user = User.joins(:blogs)
         @blog = Blog.joins(:user)
-        
-    end
+        @Comment =Comment.all
 
+
+        
+        
+
+    end
+    
+   
+
+    def create_comment
+        @comment =Comment.new(params.require(:comment).permit(:comment,:user_id,:blog_id))
+
+        if @comment.save!
+
+            flash[:comment_saved] = ["your comment has been saved"]
+            redirect_to "/blog"
+        end
+    end
 
     def show
 
@@ -27,6 +43,7 @@ class BlogController < ApplicationController
 
 
     def create 
+        
         blog = Blog.new(params.require(:blog).permit(:blog_title,:content, :blog_author,:user_id))
         if blog.save!
             redirect_to blog_index_path
