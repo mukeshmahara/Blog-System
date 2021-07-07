@@ -16,13 +16,275 @@
 
  @import "./actiontext.scss";
 
+ @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+ :root {
+   /* Light */
+   /* filter: invert(100%); */
+   --primary-bg: hsl(233, 80%, 98%);
+   --secondary-bg: hsl(0, 0%, 100%);
+   --text-primary: hsl(230, 17%, 14%);
+   --text-secondary: hsl(228, 12%, 44%);
+   --hover: hsl(236, 33%, 91%);
+   /* Generic */
+   --lime-green: hsl(163, 72%, 41%);
+   --bright-red: hsl(356, 69%, 56%);
+   --toggle: linear-gradient(hsl(210, 78%, 56%), hsl(146, 68%, 55%));
+   /* Social */
+   --facebook: hsl(208, 92%, 53%);
+   --twitter: hsl(203, 89%, 53%);
+   --instagram: hsl(37, 97%, 70%);
+   --youtube: hsl(348, 97%, 39%);
+ }
+ body {
+   font-family: "Inter", sans-serif;
+ }
+ body.active {
+   --primary-bg: #20222f; 
+   --secondary-bg: #1d2029;
+   --text-primary: hsl(0, 0%, 100%);
+   --text-secondary: hsl(228, 34%, 66%);
+   --hover: #343a56;
+ }
+ @media (prefers-color-scheme: dark) {
+   :root {
+     --primary-bg: #20222f;
+     --secondary-bg: #1d2029;
+     --text-primary: hsl(0, 0%, 100%);
+     --text-secondary: hsl(228, 34%, 66%);
+     --hover: #343a56;
+   }
+ }
+ 
+ h1,
+ h2,
+ h3,
+ h4,
+ h5,
+ h6,
+ p,
+ label {
+   margin-bottom: 0;
+ }
+ 
+ html {
+   background: linear-gradient(
+     180deg,
+     var(--primary-bg) 35%,
+     var(--secondary-bg) 35%
+   ) !important;
+   padding-top: 30px;
+ }
+ .header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+ .header h2 {
+   color: var(--text-primary);
+   font-weight: 600;
+   font-size: 1.8rem;
+ }
+ .header p {
+   color: var(--text-secondary);
+   font-weight: 600;
+ }
+ .toggle-button {
+   display: flex;
+   align-items: center;
+ }
+ .toggle-button p {
+   font-size: 14px;
+   margin-right: 10px;
+   color: var(--text-secondary);
+ }
+ #toggle-label-light {
+   display: none;
+ }
+ 
+ @media (max-width: 768px) {
+   .header {
+     flex-direction: column;
+   }
+   .toggle-button {
+     justify-content: space-between;
+     width: 100%;
+     margin-top: 20px;
+   }
+ }
+ 
+ input[type="checkbox"] {
+   -webkit-appearance: none;
+   visibility: hidden;
+   display: none;
+ }
+ .check {
+   position: relative;
+   display: block;
+   width: 40px;
+   height: 20px;
+   background-image: var(--toggle);
+   cursor: pointer;
+   border-radius: 20px;
+   overflow: hidden;
+   transition: ease-in 0.5s;
+ }
+ input[type="checkbox"]:checked ~ .check {
+   background: white;
+ }
+ .check:before {
+   position: absolute;
+   content: "";
+   top: 2px;
+   left: 2px;
+   height: 16px;
+   width: 16px;
+   background-color: white;
+   border-radius: 50%;
+   transition: 0.5s;
+ }
+ input[type="checkbox"]:checked ~ .check:before {
+   transform: translateX(-50px);
+ }
+ .check:after {
+   position: absolute;
+   content: "";
+   top: 2px;
+   left: 2px;
+   height: 16px;
+   width: 16px;
+   background-color: #1e202a;
+   border-radius: 50%;
+   transition: 0.5s;
+   transform: translateX(50px);
+ }
+ input[type="checkbox"]:checked ~ .check:after {
+   transform: translateX(0px);
+ }
+ 
+ /* Followers Stats */
+ .followers-stat {
+   margin-top: 30px;
+ }
+ .follower-card {
+   background-color: var(--primary-bg);
+   box-shadow: 0px 0px 2px 0px rgba(202, 202, 202, 0.5);
+   border-radius: 6px;
+   height: 220px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 30px;
+   cursor: pointer;
+ }
+ .follower-card:hover {
+   background-color: var(--hover);
+ }
+ .id {
+   display: flex;
+   align-items: center;
+   margin-bottom: 20px;
+ }
+ .id .social-icon {
+   height: 20px;
+   width: 20px;
+   margin-right: 10px;
+ }
+ .id .username {
+   font-size: 14px;
+   color: var(--text-secondary);
+   font-weight: 700;
+ }
+ .follower-card h1 {
+   color: var(--text-primary);
+   font-weight: 700;
+   font-size: 3.2rem;
+ }
+ .follower-card h4 {
+   color: var(--text-secondary);
+   font-size: 14px;
+   text-transform: uppercase;
+   letter-spacing: 3px;
+   margin-bottom: 20px;
+ }
+ .today {
+   font-size: 12px;
+   color: var(--lime-green);
+   font-weight: 700;
+ }
+ .follower-card .down {
+   color: var(--bright-red);
+ }
+ 
+ .border-fb {
+   border-top: 4px solid var(--facebook);
+ }
+ .border-twitter {
+   border-top: 4px solid var(--twitter);
+ }
+ .border-insta {
+   border-top: 4px solid var(--instagram);
+ }
+ .border-youtube {
+   border-top: 4px solid var(--youtube);
+ }
+ 
+ /* Overview stat */
+ .overview-stat .sub-heading {
+   color: var(--text-secondary);
+   font-size: 1.6rem;
+   font-weight: 600;
+   margin-bottom: 30px;
+ }
+ .overview-stat .stat-card {
+   background-color: var(--primary-bg);
+   -webkit-box-shadow: 0px 0px 2px 0px rgba(202, 202, 202, 0.5);
+   box-shadow: 0px 0px 2px 0px rgba(202, 202, 202, 0.5);
+   border-radius: 6px;
+   padding: 20px;
+   cursor: pointer;
+   margin-bottom: 20px;
+ }
+ .overview-stat .stat-card:hover {
+   background-color: var(--hover);
+ }
+ .overview-stat .stat-card h5 {
+   color: var(--text-secondary);
+   font-size: 1rem;
+   font-weight: 600;
+ }
+ .overview-stat .stat-card .social-icon {
+   height: 20px;
+   width: 20px;
+ }
+ .overview-stat .stat-card h3 {
+   color: var(--text-primary);
+   font-weight: 700;
+   font-size: 2rem;
+ }
+ .overview-stat .stat-card .report {
+   font-size: 12px;
+   color: var(--lime-green);
+   font-weight: 500;
+ }
+ .overview-stat .stat-card .down {
+   color: var(--bright-red);
+ }
+ 
+
+
+
+
+
+
+ /* my custom */
  *{
      margin: 0;
      padding: 0;
-
+     /* background-color: rgb(99, 97, 95); */
  }
- html{
-    background-color: rgb(99, 97, 95);
+ .html{
+    background-color: rgb(99, 97, 95) ;
  }
  .header-color{background-image: linear-gradient(to right,rgb(137, 146, 142),rgb(211, 88, 79)) !important;
 
@@ -42,4 +304,25 @@
     width: 20px;
     border-radius: 50%;
     margin: 0 0 0 0;
+}
+
+.comment{
+  border: solid 2px rgb(226, 218, 218);
+  border-radius: 40px;
+  margin: 5px 0;
+  background: rgb(232, 232, 232);
+}
+
+.comment:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.show-more-comment{
+  cursor: pointer;
+
+}
+.show-more-comment:hover{
+  text-decoration: underline;
+  opacity: 0.9;
 }
