@@ -44,7 +44,8 @@ document.addEventListener("turbolinks:load", function() {
 
     document.querySelectorAll('.cmntbutton').forEach(element =>{
         var id =document.querySelectorAll('.cmntbutton')[count1++].id.split("cmntbtn")[1]
-        element.addEventListener('click',()=>{
+        element.addEventListener('click',(event)=>{
+            // const id = event.target.id
             document.getElementById('comment'+id).focus()
         })
     })
