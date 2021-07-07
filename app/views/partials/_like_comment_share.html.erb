@@ -1,41 +1,49 @@
-<div>
-    <div>
-
-
-
-
-
-        <div id="like_cmnt_show " class="d-flex justify-content-between border" >
-
-            <span class="right"><div id="likes"></div>likes</span>
-            <div id="commnets"></div>comments
-        <hr>
+<div >
+  <div>
+    <div class="d-flex justify-content-end my-3" >
+      <button class="btn border border-info mx-5 likebutton"  id= "likebtn<%=blog_id%>">like</button>
+      <button class="btn border border-info mx-5 cmntbutton" id= "cmntbtn<%=blog_id%>">comment</button>
+      <div  class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn border border-success sharebutton" id= "sharebtn<%=blog_id%>" >share</button>
+      </div>
+      
+      <div class="dropdown-menu border-success bg-light shadow">
+        
+        <div class="fb-share-button p-3" data-href="https://outblog.herokuapp.com/blogs" data-layout="button" data-size="small">
+          <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Foutblog.herokuapp.com%2Fblogs&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a>
         </div>
-
-        <div class="d-flex justify-content-end my-3">
-            
-            <button class="btn border border-primary " id="likebtn">like</button>
-            <button class="btn border border-info mx-5" id = "cmntbtn">comment</button>
-            <button class="btn border border-success" id= "sharebtn">share</button>
-
-        </div>
-
-        <div id="comment_box" class= " bg-light shadow p-4 d-none">
-
-            <div class="d-flex justify-content-inline  ">
-            <%= form_with model:{@blog,@comment},method: :post do |form| %>
-                <span>
-                    `
-                    <%=form.text_area :comment%>
-                    <%=form.submit%>
-
-                
-                </span>
-            <% end %>
-           
-            <%# Comment form %>
-        </div>
-
-
+        
+        <a class="dropdown-item" href="#">
+          <div><script src="https://platform.linkedin.com/in.js" type="text/javascript">
+              lang: en_US
+            </script>
+            <script type="IN/Share" data-url="https://outblog.herokuapp.com/blogs"></script></div>
+        </a>
+      </div>
     </div>
+  </div>
+
+  <div class ="d-none" id="comment-section<%=blog_id%>">
+    <div id="comment_box" class= " bg-light shadow p-4">
+      <div  class ="" id="comment-section<%=blog_id%>">
+        <%= form_with model:Comment,url:{ action: :create_comment} do |form| %>
+          <span >
+            <div class="row">
+              <div class="col-md-1">
+                <img src=<%=url_for(current_user.avatar)%> class="profile">
+              </div>
+              <div class="col-md-9">
+                <%=form.text_area :comment,:id=>"comment#{blog_id}",:class=>"form-control col-md-6 rounded",:placeholder=>"Write comment..."%>
+              </div>
+              <%=form.text_field :user_id, :type=>"hidden", :id=>"comment_user_id#{blog_id}", :value=>current_user.id %>
+              <%=form.text_field :blog_id, :type=>"hidden",:id=>"comment_blog_id#{blog_id}", :value=>blog_id %>
+              <div class="col-md-1">
+                <%=form.submit "comment",:class=>"btn btn-outline-primary" %>
+              </div>
+            </div>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
