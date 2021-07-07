@@ -21,28 +21,35 @@ document.addEventListener("turbolinks:load", function() {
 
         }
     };
-
-    var blog_id =  ($('#meroId').data('id'))
-    console.log(blog_id)
-
-    likebtn = document.getElementById("likebtn"+blog_id)
-    console.log(likebtn)
-    commentbtn = document.getElementById("cmntbtn"+blog_id)
-    console.log(commentbtn)
-
-    sharebtn = document.getElementById("sharebtn"+blog_id)
-    console.log(sharebtn)
-    var count = 1;
     
     
-    likebtn.onclick=()=>{
-        document.getElementById("likes").innerHTML = count++;
+    let count=0;
+    
+    document.querySelectorAll('.likebutton').forEach(element => {
         
-    }
-    commentbtn.onclick=()=>{
-        document.getElementById('comment'+blog_id).focus()
+        var id  = document.querySelectorAll('.likebutton')[count++].id.split("likebtn")[1]
+        
+        element.addEventListener('click',(event)=>{
+            var likes = 1;
 
-    }
+            document.getElementById('likes'+id).innerText = likes++
+            
+
+
+        })
+    });
+
+    var count1=0;
+    // console.log(document.querySelectorAll('.cmntbutton'))
+
+    document.querySelectorAll('.cmntbutton').forEach(element =>{
+        var id =document.querySelectorAll('.cmntbutton')[count1++].id.split("cmntbtn")[1]
+        element.addEventListener('click',()=>{
+            document.getElementById('comment'+id).focus()
+        })
+    })
+
+
 
 });
 
