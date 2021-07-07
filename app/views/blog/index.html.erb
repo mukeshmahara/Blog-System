@@ -49,13 +49,13 @@
             <div class= "col-md-12 " style="overflow:scroll; height:500px;">
               
               <% @blog.each do |blog| %>
-                <div class = "col-md-12  ">
+                <div class = "col-md-12  " >
                 <%
                   user_id = blog.user_id
                   user = User.find(user_id)
 
                 %>
-                  <div class = "card rounded shadow">
+                  <div class = "card  rounded shadow" id="box"  >
                     <div class = "card-header header-color">
                       <div class="inner p-1 "  >
                         <div class="inner-p bg-light p-2">
@@ -94,22 +94,102 @@
                       
                       </div>
 
-                                            
+                                                                
                       
                       <div class="">
-                        <%=link_to "Read More", blog, :class => "text-success text-decoration-none "%>
+                      
+                        <div ><%=link_to "Read More", blog, :class => "text-success d-flex mx-4 justify-content-end text-decoration-none "%>
+                        </div>
+                        
                         <%if isLogged_in && (current_user.id)== blog.user_id%>  
                           <div class="">
                             <%= link_to '', blog_path(blog), :class => "fa fa-trash text-danger text-right ",
                             method: :delete,
                             data: { confirm: 'Are You sure?' } %>
                             <%=link_to "", edit_blog_path(blog.id), :class => "text-secondary fa fa-edit text-decoration-none mx-3"%>
+                                             
+                          </div>
+
+                        <%end%>
+                        
+
+                        <hr>
+                        <div class="col-md-12">
+                        <div id="like_cmnt_show " class="row text-center" >
+                          
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+                              <span id="likes<%=blog.id%>"></span> likes
+                            </div>
+
+                            <div id=<%=blog.id%> class="show-more-comment  col-md-6 col-sm-6 col-lg-6"><%=comment_on_specific_blog(blog.id).count%> comments</div>
                           
                           </div>
-                        <%end%>
-                      </div>
-                      <div class="fb-comments" data-href="http://localhost:3000/blog" data-width="700" data-numposts="1"></div>
+                        </div>
+                        <hr>
+                        
+                        <%if isLogged_in%>
+                          
+                            <%=render "partials/like_comment_share" ,{blog_id: blog.id}%>
 
+                        
+                        <%end%>
+                        
+                        <div class="bg-light p-3" >
+
+                          <div class = "mx-5 show-more-comment text-secondary" >View Previous comments</div>
+                          <div class="my-3 ">
+                        
+                            <% comment_on_specific_blog(blog.id).each do |comments| %>
+                            <div class="container d-flex">
+                              <div class ="row">
+                                <div class="col-md-12">
+                                
+                                  <a href="/profile/<%=blog.blog_author%>"><img src=<%=url_for(find_UserbyCommentID(comments.user_id).avatar)%>  class="profile-img-sm mx-4"></div></a>
+                                </div>
+                                
+                                <div class="col-md-12 d-flex justify-content-between px-3 option " id="more-option-parent<%=comments.id%>">
+                                
+                                  <div  data-toggle="tooltip" data-placement="top" class="comment text-muted px-3" 
+                                  title="By <%=find_UserbyCommentID(comments.user_id).username%>, on <%=comments.created_at.strftime('%b %d, %Y')%>">
+                                  <%=comments.comment%></div>
+                                  
+                                  <div class=" show" id="more-option<%=comments.id%>">
+                                    <div class="">
+                                      <div  class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-chevron-circle-down text-secondary" ></i>
+                                      </div>
+
+                                      <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">edit</a>
+                                        <a class="dropdown-item" href="#">update</a>
+                                        <a class="dropdown-item" href="#">delete</a>
+                                      </div>
+                                    </div>                                  
+                                  </div>
+                                </div>
+                          
+                              </div>
+                            <% end %> 
+
+                            <div class=" mx-5 show-more-comment text-secondary my-4">View More Comments </div> 
+                          </div>
+                        </div>
+
+
+
+
+
+                        <div >
+                          <%if flash[:comment_saved]%>
+                            <%flash[:comment_saved].each do |msg| %>
+                              <div class="alert alert-success my-2">
+                                <%= msg %>
+                              </div>
+                            <%end %>
+                          <%end%>
+                        </div>
+                      </div>
+                      
                   </div>
                 </div>
               </div>
@@ -121,5 +201,8 @@
       </div>
     </div>
     
+    
   </div>
 </div>
+
+
