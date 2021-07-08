@@ -5,14 +5,18 @@
         <h2 class= "text-center">No any Blog found. Please try something else...</h2>
     <%else%>
         
-        <ol>
+        
             <% @searchedBlog.each do |blog| %>
-                
-                    <li><%=link_to blog.blog_title, blog ,:class => "text-success text-decoration-none"%></li>
-
+                <div class="container">
+                    <div class="display-5 ">
+                        <%=link_to blog.blog_title, blog ,:class => "card card-inverse text-uppercase text-success text-decoration-none"%>
+                        
+                    </div>
+                    <div><%=blog.created_at%></div>
+                </div>
             <% end %>
 
-        </ol>
+        
     <%end%>
     <br>
    
