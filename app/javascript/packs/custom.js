@@ -1,5 +1,15 @@
 document.addEventListener("turbolinks:load", function() {
 
+    console.log(document.getElementById('query').addEventListener('keyup',(e)=>{
+        console.log(this.val())
+    }))
+
+    // $('#query').on('keyup', function () {
+    //     // alert('This is not trigged when i changed the text');
+    //     var input = $(this)
+    //     console.log(input.val())
+    // });
+
     let themeToggler = document.getElementById("theme-toggler");
     let toggleDark = document.getElementById("toggle-label-dark");
     let toggleLIGHT = document.getElementById("toggle-label-light");
@@ -55,7 +65,7 @@ document.addEventListener("turbolinks:load", function() {
     document.querySelectorAll('.option').forEach(element=>{
         var id =document.querySelectorAll('.option>.show')[count2++].id.split("more-option")[1]
         
-        
+        ~
         $('#more-option'+id).hide(); 
 
         $('#more-option-parent'+id).mouseover(function () {
@@ -78,7 +88,6 @@ document.addEventListener("turbolinks:load", function() {
             document.getElementById('comment'+id).focus()
         })
     })
-
 
 
 });
