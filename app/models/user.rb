@@ -3,6 +3,6 @@ class User < ApplicationRecord
     has_many :blogs
     has_one_attached :avatar
     
-    # validates :username, :email, :password, :job, presence:true
+    validates :username, :email, :password, :job, presence:true
     
 end
