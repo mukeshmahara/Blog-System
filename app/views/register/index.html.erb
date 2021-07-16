@@ -2,7 +2,7 @@
 
 <%=render "./partials/navbar"%>
 
-<div class="container-fluid mt-5 py-3 bg-dark">
+<div class="container-fluid mt-5 py-3 ">
 
     <div class= "container">
  
@@ -16,8 +16,8 @@
         <div class="row d-flex justify-content-center ">
             <div class="col-md-9 border shadow-sm bg-light rounded p-4 justify-content-center ">
 
-                <%= form_for :register ,html: { multipart: true } do |form|  %>
-
+                <%= form_for :register,html: { multipart: true } do |form|  %>
+                  
                    <div>Profile Picture</div>
                    <img id="output"  class="rounded-circle fa fa-user fa-3x mb-3"  width="100px" height="100px" />
 
@@ -33,6 +33,10 @@
                             <%= form.label :username, "Username:" %>
                             <%= form.text_field :username ,:class =>"form-control "%>
                             
+                               
+                               
+                        
+
                             <%= form.label :email, "Email:" %>
                             <%= form.text_field :email ,:class =>"form-control "%>
 
