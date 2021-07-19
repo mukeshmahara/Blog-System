@@ -140,10 +140,17 @@
                             <div class = "mx-5 show-more-comment text-secondary" >View Previous comments</div>
                           <% end %>
                           <div class="my-3 ">
-                        
+                          <% blogComments = []%>
                             <% comment_on_specific_blog(blog.id).each do |comments| %>
+                            <% 
+                              blogComments.push( comments.comment)
+
+                            
+                            %>
+                            
                             <div class="container d-flex">
                               <div class ="row">
+                                
                                 <div class="col-md-12">
                                 
                                   <a href="/profile/<%=find_UserbyCommentID(comments.user_id).username%>"><img src=<%=url_for(find_UserbyCommentID(comments.user_id).avatar)%>  class="profile-img-sm mx-4"></div></a>
@@ -157,12 +164,14 @@
                                   
                                   <div class=" show" id="more-option<%=comments.id%>">
                                     <div class="">
-                                      <div  class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-chevron-circle-down text-secondary" ></i>
+                                      <div  class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-chevron-circle-down text-secondary mx-3" ></i>
+                                        <i class="fas fa-edit text-secondary mx-3"></i>
+                                        <i class="fas fa-ellipsis-v text-secondary mx-3"></i>
                                       </div>
 
                                       <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">edit</a>
+                                        <a class="dropdown-item" onclick="focus()" href="#">edit</a>
                                         <a class="dropdown-item" href="#">update</a>
                                         <a class="dropdown-item" href="#">delete</a>
                                       </div>
@@ -179,7 +188,7 @@
                         </div>
 
 
-
+<%=blogComments%>
 
 
                         <div >
