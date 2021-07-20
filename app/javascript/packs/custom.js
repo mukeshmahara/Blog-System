@@ -60,6 +60,7 @@ document.addEventListener("turbolinks:load", function() {
 
         })
     })
+    
 
     var count2=0
     document.querySelectorAll('.option').forEach(element=>{
@@ -79,12 +80,13 @@ document.addEventListener("turbolinks:load", function() {
     })
 
     
-
+    
     document.querySelectorAll('.cmntbutton').forEach(element =>{
         var id =document.querySelectorAll('.cmntbutton')[count1++].id.split("cmntbtn")[1]
         element.addEventListener('click',(event)=>{
             // const id = event.target.id
             document.getElementById('comment-section'+id).classList.remove('d-none')
+
             document.getElementById('comment'+id).focus()
         })
     })
