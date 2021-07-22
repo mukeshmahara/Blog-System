@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to:'blog#index'
 
-  resources :blog, :user, :profile, :register
+  resources :blog, :user, :profile
   
   resources :blog do
     resources :comment, only: [:create, :destroy,:edit]
