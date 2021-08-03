@@ -1,4 +1,5 @@
 module BlogHelper
+
     def comment_on_specific_blog(blog_id)
         @comments= Comment.where(:blog_id=>blog_id).order("created_at DESC")
         
